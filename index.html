@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEG Brainwave Tutorial - Learn to Read Brain Signals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 EEG Brainwave Tutorial</h1>
+            <p>Learn to read and interpret brainwave signals with interactive animations</p>
+        </header>
+
+        <nav class="wave-selector">
+            <button class="wave-btn active" data-wave="delta">Delta (0.5-4 Hz)</button>
+            <button class="wave-btn" data-wave="theta">Theta (4-8 Hz)</button>
+            <button class="wave-btn" data-wave="alpha">Alpha (8-13 Hz)</button>
+            <button class="wave-btn" data-wave="beta">Beta (13-30 Hz)</button>
+            <button class="wave-btn" data-wave="gamma">Gamma (30-100 Hz)</button>
+        </nav>
+
+        <main class="main-content">
+            <section class="visualization-panel">
+                <div class="eeg-display">
+                    <h3>Live EEG Simulation</h3>
+                    <canvas id="eegCanvas" width="800" height="400"></canvas>
+                    <div class="controls">
+                        <button id="playPause" class="control-btn">⏸️ Pause</button>
+                        <button id="reset" class="control-btn">🔄 Reset</button>
+                        <label for="amplitude">Amplitude: <span id="amplitudeValue">50</span></label>
+                        <input type="range" id="amplitude" min="10" max="100" value="50">
+                        <label for="speed">Speed: <span id="speedValue">1x</span></label>
+                        <input type="range" id="speed" min="0.1" max="3" step="0.1" value="1">
+                    </div>
+                </div>
+
+                <div class="frequency-spectrum">
+                    <h3>Frequency Spectrum</h3>
+                    <canvas id="spectrumCanvas" width="400" height="300"></canvas>
+                </div>
+            </section>
+
+            <section class="info-panel">
+                <div class="wave-info" id="waveInfo">
+                    <h3 class="wave-name">Delta Waves</h3>
+                    <div class="wave-details">
+                        <p><strong>Frequency:</strong> <span class="frequency">0.5-4 Hz</span></p>
+                        <p><strong>Amplitude:</strong> <span class="amplitude-range">High (100-200 µV)</span></p>
+                        <p><strong>State:</strong> <span class="brain-state">Deep Sleep, Unconsciousness</span></p>
+                        
+                        <div class="description">
+                            <h4>Characteristics:</h4>
+                            <p>Delta waves are the slowest brainwaves and are associated with deep, dreamless sleep. They have the highest amplitude and are crucial for healing and regeneration.</p>
+                            
+                            <h4>Clinical Significance:</h4>
+                            <ul>
+                                <li>Present during stages 3 and 4 of NREM sleep</li>
+                                <li>Associated with growth hormone release</li>
+                                <li>Important for memory consolidation</li>
+                                <li>Abnormal delta activity in awake states may indicate brain injury</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="electrode-map">
+                    <h3>EEG Electrode Placement (10-20 System)</h3>
+                    <div class="brain-map">
+                        <svg viewBox="0 0 300 350" id="brainSvg">
+                            <!-- Brain outline -->
+                            <ellipse cx="150" cy="175" rx="140" ry="160" fill="#f0f8ff" stroke="#333" stroke-width="2"/>
+                            
+                            <!-- Electrode positions -->
+                            <circle cx="150" cy="50" r="8" class="electrode" data-electrode="Fpz" fill="#4CAF50"/>
+                            <circle cx="110" cy="70" r="8" class="electrode" data-electrode="Fp1" fill="#4CAF50"/>
+                            <circle cx="190" cy="70" r="8" class="electrode" data-electrode="Fp2" fill="#4CAF50"/>
+                            
+                            <circle cx="70" cy="120" r="8" class="electrode" data-electrode="F7" fill="#2196F3"/>
+                            <circle cx="110" cy="100" r="8" class="electrode" data-electrode="F3" fill="#2196F3"/>
+                            <circle cx="150" cy="90" r="8" class="electrode" data-electrode="Fz" fill="#2196F3"/>
+                            <circle cx="190" cy="100" r="8" class="electrode" data-electrode="F4" fill="#2196F3"/>
+                            <circle cx="230" cy="120" r="8" class="electrode" data-electrode="F8" fill="#2196F3"/>
+                            
+                            <circle cx="50" cy="175" r="8" class="electrode" data-electrode="T3" fill="#FF9800"/>
+                            <circle cx="110" cy="150" r="8" class="electrode" data-electrode="C3" fill="#FF9800"/>
+                            <circle cx="150" cy="140" r="8" class="electrode" data-electrode="Cz" fill="#FF9800"/>
+                            <circle cx="190" cy="150" r="8" class="electrode" data-electrode="C4" fill="#FF9800"/>
+                            <circle cx="250" cy="175" r="8" class="electrode" data-electrode="T4" fill="#FF9800"/>
+                            
+                            <circle cx="70" cy="230" r="8" class="electrode" data-electrode="T5" fill="#9C27B0"/>
+                            <circle cx="110" cy="200" r="8" class="electrode" data-electrode="P3" fill="#9C27B0"/>
+                            <circle cx="150" cy="190" r="8" class="electrode" data-electrode="Pz" fill="#9C27B0"/>
+                            <circle cx="190" cy="200" r="8" class="electrode" data-electrode="P4" fill="#9C27B0"/>
+                            <circle cx="230" cy="230" r="8" class="electrode" data-electrode="T6" fill="#9C27B0"/>
+                            
+                            <circle cx="110" cy="280" r="8" class="electrode" data-electrode="O1" fill="#E91E63"/>
+                            <circle cx="150" cy="270" r="8" class="electrode" data-electrode="Oz" fill="#E91E63"/>
+                            <circle cx="190" cy="280" r="8" class="electrode" data-electrode="O2" fill="#E91E63"/>
+                        </svg>
+                    </div>
+                    <div class="electrode-legend">
+                        <div class="legend-item"><span class="color-box" style="background: #4CAF50;"></span>Frontal Polar</div>
+                        <div class="legend-item"><span class="color-box" style="background: #2196F3;"></span>Frontal</div>
+                        <div class="legend-item"><span class="color-box" style="background: #FF9800;"></span>Central/Temporal</div>
+                        <div class="legend-item"><span class="color-box" style="background: #9C27B0;"></span>Parietal</div>
+                        <div class="legend-item"><span class="color-box" style="background: #E91E63;"></span>Occipital</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section class="tutorial-section">
+            <h2>How to Read EEG Data</h2>
+            <div class="tutorial-grid">
+                <div class="tutorial-card">
+                    <h3>1. Understanding Frequency</h3>
+                    <p>EEG measures electrical activity in the brain. The frequency (Hz) tells us how many times per second the brain waves oscillate. Different frequencies correspond to different mental states.</p>
+                </div>
+                <div class="tutorial-card">
+                    <h3>2. Amplitude Analysis</h3>
+                    <p>Amplitude (measured in microvolts - µV) indicates the strength of the brain activity. Higher amplitudes often correlate with synchronized neural firing.</p>
+                </div>
+                <div class="tutorial-card">
+                    <h3>3. Electrode Placement</h3>
+                    <p>The 10-20 system standardizes electrode placement. Each position corresponds to specific brain regions, helping localize brain activity.</p>
+                </div>
+                <div class="tutorial-card">
+                    <h3>4. Pattern Recognition</h3>
+                    <p>Learn to identify characteristic patterns: sleep spindles, K-complexes, epileptiform discharges, and normal rhythmic activity.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Educational EEG Tutorial - Learn about brainwave patterns and their clinical significance</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
