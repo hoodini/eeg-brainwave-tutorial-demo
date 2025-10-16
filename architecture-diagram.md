@@ -3,73 +3,73 @@
 ```mermaid
 graph TD
     %% HTML Structure Layer
-    HTML[index.html<br/>📄 Main Document] --> Head[HTML Head<br/>📋 Meta & Links]
-    HTML --> Body[HTML Body<br/>🏗️ Structure]
+    HTML["index.html - Main Document"] --> Head["HTML Head - Meta & Links"]
+    HTML --> Body["HTML Body - Structure"]
     
-    Head --> GoogleFonts[Google Fonts<br/>🔤 Inter Font Family]
-    Head --> StylesLink[styles.css Link<br/>🎨 Stylesheet Reference]
+    Head --> GoogleFonts["Google Fonts - Inter Font Family"]
+    Head --> StylesLink["styles.css Link - Stylesheet Reference"]
     
-    Body --> Container[Container<br/>📦 Main Wrapper]
-    Container --> Header[Header<br/>🧠 Title & Description]
-    Container --> WaveNav[Wave Navigation<br/>🎛️ Wave Selector Buttons]
-    Container --> MainContent[Main Content<br/>📊 Grid Layout]
-    Container --> TutorialSection[Tutorial Section<br/>📚 Educational Cards]
-    Container --> Footer[Footer<br/>ℹ️ Info Text]
+    Body --> Container["Container - Main Wrapper"]
+    Container --> Header["Header - Title & Description"]
+    Container --> WaveNav["Wave Navigation - Selector Buttons"]
+    Container --> MainContent["Main Content - Grid Layout"]
+    Container --> TutorialSection["Tutorial Section - Educational Cards"]
+    Container --> Footer["Footer - Info Text"]
     
     %% Main Content Structure
-    MainContent --> VisualizationPanel[Visualization Panel<br/>📈 Left Column]
-    MainContent --> InfoPanel[Info Panel<br/>📝 Right Column]
+    MainContent --> VisualizationPanel["Visualization Panel - Left Column"]
+    MainContent --> InfoPanel["Info Panel - Right Column"]
     
     %% Visualization Panel Components
-    VisualizationPanel --> EEGDisplay[EEG Display<br/>📺 Canvas Container]
-    VisualizationPanel --> FrequencySpectrum[Frequency Spectrum<br/>📊 Spectrum Canvas]
+    VisualizationPanel --> EEGDisplay["EEG Display - Canvas Container"]
+    VisualizationPanel --> FrequencySpectrum["Frequency Spectrum - Spectrum Canvas"]
     
-    EEGDisplay --> EEGCanvas[eegCanvas<br/>🎨 Main Visualization]
-    EEGDisplay --> Controls[Controls<br/>🎮 Interactive Elements]
-    FrequencySpectrum --> SpectrumCanvas[spectrumCanvas<br/>📈 Frequency Bars]
+    EEGDisplay --> EEGCanvas["eegCanvas - Main Visualization"]
+    EEGDisplay --> Controls["Controls - Interactive Elements"]
+    FrequencySpectrum --> SpectrumCanvas["spectrumCanvas - Frequency Bars"]
     
-    Controls --> PlayPauseBtn[Play/Pause Button<br/>⏯️ Animation Control]
-    Controls --> ResetBtn[Reset Button<br/>🔄 Time Reset]
-    Controls --> AmplitudeSlider[Amplitude Slider<br/>📏 Wave Height]
-    Controls --> SpeedSlider[Speed Slider<br/>⚡ Animation Speed]
+    Controls --> PlayPauseBtn["Play/Pause Button - Animation Control"]
+    Controls --> ResetBtn["Reset Button - Time Reset"]
+    Controls --> AmplitudeSlider["Amplitude Slider - Wave Height"]
+    Controls --> SpeedSlider["Speed Slider - Animation Speed"]
     
     %% Info Panel Components
-    InfoPanel --> WaveInfo[Wave Info<br/>📋 Dynamic Content]
-    InfoPanel --> ElectrodeMap[Electrode Map<br/>🧠 SVG Brain Map]
+    InfoPanel --> WaveInfo["Wave Info - Dynamic Content"]
+    InfoPanel --> ElectrodeMap["Electrode Map - SVG Brain Map"]
     
-    ElectrodeMap --> BrainSVG[brainSvg<br/>🎯 Interactive SVG]
-    BrainSVG --> ElectrodeCircles[Electrode Circles<br/>⚪ 21 Positions]
-    BrainSVG --> ElectrodeLegend[Electrode Legend<br/>🏷️ Color Categories]
+    ElectrodeMap --> BrainSVG["brainSvg - Interactive SVG"]
+    BrainSVG --> ElectrodeCircles["Electrode Circles - 21 Positions"]
+    BrainSVG --> ElectrodeLegend["Electrode Legend - Color Categories"]
     
     %% CSS Styling Layer
-    CSS[styles.css<br/>🎨 Styling System] --> GlobalStyles[Global Styles<br/>🌐 Reset & Base]
-    CSS --> LayoutStyles[Layout Styles<br/>📐 Grid & Flexbox]
-    CSS --> ComponentStyles[Component Styles<br/>🧩 Individual Elements]
-    CSS --> AnimationStyles[Animation Styles<br/>🎬 Transitions & Effects]
-    CSS --> ResponsiveStyles[Responsive Styles<br/>📱 Media Queries]
+    CSS["styles.css - Styling System"] --> GlobalStyles["Global Styles - Reset & Base"]
+    CSS --> LayoutStyles["Layout Styles - Grid & Flexbox"]
+    CSS --> ComponentStyles["Component Styles - Individual Elements"]
+    CSS --> AnimationStyles["Animation Styles - Transitions & Effects"]
+    CSS --> ResponsiveStyles["Responsive Styles - Media Queries"]
     
     %% JavaScript Architecture
-    JS[script.js<br/>⚙️ Main Logic] --> EEGSimulator[EEGSimulator Class<br/>🧮 Core Functionality]
-    JS --> EEGEducation[EEGEducation Class<br/>🎓 Learning Features]
-    JS --> InitScript[Initialization<br/>🚀 DOMContentLoaded]
+    JS["script.js - Main Logic"] --> EEGSimulator["EEGSimulator Class - Core Functionality"]
+    JS --> EEGEducation["EEGEducation Class - Learning Features"]
+    JS --> InitScript["Initialization - DOMContentLoaded"]
     
     %% EEGSimulator Class Methods
-    EEGSimulator --> Constructor[constructor()<br/>🏗️ Setup & Initialize]
-    EEGSimulator --> SetupCanvas[setupCanvas()<br/>📐 Canvas Configuration]
-    EEGSimulator --> SetupEvents[setupEventListeners()<br/>👂 Event Binding]
-    EEGSimulator --> GenerateWave[generateWaveData()<br/>🌊 Wave Configuration]
-    EEGSimulator --> UpdateInfo[updateWaveInfo()<br/>📝 Content Updates]
-    EEGSimulator --> DrawEEG[drawEEG()<br/>🎨 Main Rendering]
-    EEGSimulator --> DrawSpectrum[drawSpectrum()<br/>📊 Spectrum Rendering]
-    EEGSimulator --> AnimateLoop[animate()<br/>🔄 Animation Loop]
-    EEGSimulator --> ElectrodeInteraction[Electrode Methods<br/>🎯 Hover & Tooltip]
+    EEGSimulator --> Constructor["constructor() - Setup & Initialize"]
+    EEGSimulator --> SetupCanvas["setupCanvas() - Canvas Configuration"]
+    EEGSimulator --> SetupEvents["setupEventListeners() - Event Binding"]
+    EEGSimulator --> GenerateWave["generateWaveData() - Wave Configuration"]
+    EEGSimulator --> UpdateInfo["updateWaveInfo() - Content Updates"]
+    EEGSimulator --> DrawEEG["drawEEG() - Main Rendering"]
+    EEGSimulator --> DrawSpectrum["drawSpectrum() - Spectrum Rendering"]
+    EEGSimulator --> AnimateLoop["animate() - Animation Loop"]
+    EEGSimulator --> ElectrodeInteraction["Electrode Methods - Hover & Tooltip"]
     
     %% EEGEducation Class Methods
-    EEGEducation --> EduConstructor[constructor()<br/>🎓 Educational Setup]
-    EEGEducation --> WaveComparison[addWaveComparisons()<br/>🔍 Comparison Feature]
-    EEGEducation --> QuizFeatures[addQuizFeatures()<br/>🎯 Quiz System]
-    EEGEducation --> ShowComparison[showWaveComparison()<br/>📊 Modal Display]
-    EEGEducation --> StartQuiz[startQuiz()<br/>❓ Quiz Logic]
+    EEGEducation --> EduConstructor["constructor() - Educational Setup"]
+    EEGEducation --> WaveComparison["addWaveComparisons() - Comparison Feature"]
+    EEGEducation --> QuizFeatures["addQuizFeatures() - Quiz System"]
+    EEGEducation --> ShowComparison["showWaveComparison() - Modal Display"]
+    EEGEducation --> StartQuiz["startQuiz() - Quiz Logic"]
     
     %% Event Flow Connections
     WaveNav --> SetupEvents
@@ -77,60 +77,60 @@ graph TD
     ElectrodeCircles --> ElectrodeInteraction
     
     %% Data Flow
-    GenerateWave --> WaveData[(Wave Data<br/>📊 Configuration Object)]
+    GenerateWave --> WaveData[("Wave Data - Configuration Object")]
     WaveData --> DrawEEG
     WaveData --> DrawSpectrum
     WaveData --> UpdateInfo
     
     %% Canvas Rendering Pipeline
-    DrawEEG --> ClearCanvas[clearRect()<br/>🧹 Clear Canvas]
-    DrawEEG --> DrawGrid[drawGrid()<br/>📏 Background Grid]
-    DrawEEG --> MultiChannel[Multi-channel Loop<br/>🔢 8 EEG Channels]
-    DrawEEG --> WaveCalculation[Wave Mathematics<br/>🔢 Sine + Harmonics]
-    DrawEEG --> DrawTimeMarker[drawTimeMarker()<br/>⏰ Time Display]
+    DrawEEG --> ClearCanvas["clearRect() - Clear Canvas"]
+    DrawEEG --> DrawGrid["drawGrid() - Background Grid"]
+    DrawEEG --> MultiChannel["Multi-channel Loop - 8 EEG Channels"]
+    DrawEEG --> WaveCalculation["Wave Mathematics - Sine + Harmonics"]
+    DrawEEG --> DrawTimeMarker["drawTimeMarker() - Time Display"]
     
-    MultiChannel --> ChannelLabels[Channel Labels<br/>🏷️ Fp1, Fp2, F3, F4...]
-    MultiChannel --> Baselines[Baseline Drawing<br/>➖ Reference Lines]
-    MultiChannel --> WaveformPath[Waveform Path<br/>〰️ Signal Lines]
+    MultiChannel --> ChannelLabels["Channel Labels - Fp1, Fp2, F3, F4..."]
+    MultiChannel --> Baselines["Baseline Drawing - Reference Lines"]
+    MultiChannel --> WaveformPath["Waveform Path - Signal Lines"]
     
     %% Spectrum Rendering
-    DrawSpectrum --> FreqBands[Frequency Bands<br/>📊 5 Wave Types]
-    DrawSpectrum --> BarChart[Bar Chart Rendering<br/>📊 Visual Bars]
-    DrawSpectrum --> PulseAnimation[Pulse Animation<br/>💓 Active Wave Highlight]
+    DrawSpectrum --> FreqBands["Frequency Bands - 5 Wave Types"]
+    DrawSpectrum --> BarChart["Bar Chart Rendering - Visual Bars"]
+    DrawSpectrum --> PulseAnimation["Pulse Animation - Active Wave Highlight"]
     
     %% Mathematical Wave Generation
-    WaveCalculation --> SineWave[Fundamental Sine<br/>sin(t × frequency)]
-    WaveCalculation --> Harmonics[Harmonic Overlay<br/>2nd & 3rd Harmonics]
-    WaveCalculation --> NoiseGeneration[Random Noise<br/>🎲 Realistic Variation]
-    WaveCalculation --> PhaseShift[Channel Phase Shift<br/>🔄 Inter-channel Variation]
+    WaveCalculation --> SineWave["Fundamental Sine - sin t × frequency"]
+    WaveCalculation --> Harmonics["Harmonic Overlay - 2nd & 3rd Harmonics"]
+    WaveCalculation --> NoiseGeneration["Random Noise - Realistic Variation"]
+    WaveCalculation --> PhaseShift["Channel Phase Shift - Inter-channel Variation"]
     
     %% Educational Features
-    WaveComparison --> ComparisonModal[Comparison Modal<br/>📋 Dynamic Table]
-    QuizFeatures --> QuizModal[Quiz Modal<br/>❓ Interactive Questions]
-    QuizModal --> ScoreTracking[Score Tracking<br/>🏆 Progress Management]
+    WaveComparison --> ComparisonModal["Comparison Modal - Dynamic Table"]
+    QuizFeatures --> QuizModal["Quiz Modal - Interactive Questions"]
+    QuizModal --> ScoreTracking["Score Tracking - Progress Management"]
     
     %% Electrode Interaction System
-    ElectrodeInteraction --> HighlightElectrode[highlightElectrode()<br/>✨ Visual Highlight]
-    ElectrodeInteraction --> ShowTooltip[showElectrodeTooltip()<br/>💬 Info Display]
-    ElectrodeInteraction --> ClearHighlight[clearElectrodeHighlight()<br/>🧹 State Cleanup]
+    ElectrodeInteraction --> HighlightElectrode["highlightElectrode() - Visual Highlight"]
+    ElectrodeInteraction --> ShowTooltip["showElectrodeTooltip() - Info Display"]
+    ElectrodeInteraction --> ClearHighlight["clearElectrodeHighlight() - State Cleanup"]
     
     %% Animation System
-    AnimateLoop --> RequestAnimationFrame[requestAnimationFrame<br/>🎬 60fps Loop]
-    AnimateLoop --> TimeUpdate[Time Increment<br/>⏰ Based on Speed]
-    AnimateLoop --> ConditionalUpdate[Conditional Updates<br/>🔄 Play/Pause State]
+    AnimateLoop --> RequestAnimationFrame["requestAnimationFrame - 60fps Loop"]
+    AnimateLoop --> TimeUpdate["Time Increment - Based on Speed"]
+    AnimateLoop --> ConditionalUpdate["Conditional Updates - Play/Pause State"]
     
     %% State Management
-    StateManagement[(Application State<br/>📊 Central Data)] --> IsPlaying[isPlaying<br/>▶️ Animation State]
-    StateManagement --> CurrentWave[currentWave<br/>🌊 Active Wave Type]
-    StateManagement --> TimeValue[time<br/>⏰ Current Time]
-    StateManagement --> AmplitudeValue[amplitude<br/>📏 Wave Height]
-    StateManagement --> SpeedValue[speed<br/>⚡ Animation Speed]
+    StateManagement[("Application State - Central Data")] --> IsPlaying["isPlaying - Animation State"]
+    StateManagement --> CurrentWave["currentWave - Active Wave Type"]
+    StateManagement --> TimeValue["time - Current Time"]
+    StateManagement --> AmplitudeValue["amplitude - Wave Height"]
+    StateManagement --> SpeedValue["speed - Animation Speed"]
     
     %% External Dependencies
-    ExternalDeps[External Dependencies<br/>🌐 Third-party Resources] --> GoogleFonts
-    ExternalDeps --> CanvasAPI[Canvas 2D API<br/>🎨 Drawing Functions]
-    ExternalDeps --> DOMEvents[DOM Events<br/>👂 User Interactions]
-    ExternalDeps --> RequestAnimFrame[RequestAnimationFrame<br/>🎬 Browser Animation API]
+    ExternalDeps["External Dependencies - Third-party Resources"] --> GoogleFonts
+    ExternalDeps --> CanvasAPI["Canvas 2D API - Drawing Functions"]
+    ExternalDeps --> DOMEvents["DOM Events - User Interactions"]
+    ExternalDeps --> RequestAnimFrame["RequestAnimationFrame - Browser Animation API"]
     
     %% File Connections
     HTML -.->|references| CSS
