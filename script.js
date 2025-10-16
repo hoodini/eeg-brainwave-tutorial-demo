@@ -9,9 +9,11 @@ class EEGSimulator {
         this.time = 0;
         this.amplitude = 50;
         this.speed = 1;
+        this.showAllWaves = false;
         
         this.currentWave = 'delta';
         this.waveData = this.generateWaveData();
+        this.allWaveData = this.generateAllWaveData();
         
         this.setupCanvas();
         this.setupEventListeners();
@@ -50,6 +52,20 @@ class EEGSimulator {
             this.time = 0;
         });
         
+        document.getElementById('showAllWaves').addEventListener('click', () => {
+            this.showAllWaves = !this.showAllWaves;
+            const btn = document.getElementById('showAllWaves');
+            btn.textContent = this.showAllWaves ? '📊 Show Single Wave' : '🌊 Show All Waves';
+            btn.style.background = this.showAllWaves ? '#FF9800' : '#2196F3';
+            
+            // Update wave selector visibility
+            const waveSelector = document.querySelector('.wave-selector');
+            waveSelector.style.opacity = this.showAllWaves ? '0.5' : '1';
+            waveSelector.style.pointerEvents = this.showAllWaves ? 'none' : 'auto';
+            
+            this.updateWaveInfo();
+        });
+        
         // Amplitude control
         document.getElementById('amplitude').addEventListener('input', (e) => {
             this.amplitude = parseInt(e.target.value);
@@ -85,6 +101,16 @@ class EEGSimulator {
         };
         
         return waves[this.currentWave];
+    }
+    
+    generateAllWaveData() {
+        return {
+            delta: { frequency: 2, color: '#4CAF50', amplitude: 0.4 },
+            theta: { frequency: 6, color: '#2196F3', amplitude: 0.3 },
+            alpha: { frequency: 10, color: '#FF9800', amplitude: 0.5 },
+            beta: { frequency: 20, color: '#9C27B0', amplitude: 0.2 },
+            gamma: { frequency: 50, color: '#E91E63', amplitude: 0.1 }
+        };
     }
     
     updateWaveInfo() {
@@ -156,27 +182,54 @@ class EEGSimulator {
             }
         };
         
-        const info = waveInfo[this.currentWave];
         const waveInfoElement = document.getElementById('waveInfo');
         
-        waveInfoElement.innerHTML = `
-            <h3 class="wave-name">${info.name}</h3>
-            <div class="wave-details">
-                <p><strong>Frequency:</strong> <span class="frequency">${info.frequency}</span></p>
-                <p><strong>Amplitude:</strong> <span class="amplitude-range">${info.amplitude}</span></p>
-                <p><strong>State:</strong> <span class="brain-state">${info.state}</span></p>
-                
-                <div class="description">
-                    <h4>Characteristics:</h4>
-                    <p>${info.description}</p>
+        if (this.showAllWaves) {
+            // Show combined wave information
+            waveInfoElement.innerHTML = `
+                <h3 class="wave-name" style="color: #333;">All Brainwaves Combined</h3>
+                <div class="wave-details">
+                    <p><strong>Display Mode:</strong> <span class="frequency">Composite EEG View</span></p>
+                    <p><strong>Frequency Range:</strong> <span class="amplitude-range">0.5-100 Hz</span></p>
+                    <p><strong>View:</strong> <span class="brain-state">All Brain States Superimposed</span></p>
                     
-                    <h4>Clinical Significance:</h4>
-                    <ul>
-                        ${info.significance.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
+                    <div class="description">
+                        <h4>What You're Seeing:</h4>
+                        <p>This composite view shows all five brainwave types simultaneously. Each channel represents a different wave type with all frequencies combined, showing how real EEG data appears with multiple rhythms present.</p>
+                        
+                        <h4>Wave Types Displayed:</h4>
+                        <ul>
+                            <li><span style="color: #4CAF50; font-weight: bold;">Delta (0.5-4 Hz)</span> - Deep sleep patterns</li>
+                            <li><span style="color: #2196F3; font-weight: bold;">Theta (4-8 Hz)</span> - Light sleep, meditation</li>
+                            <li><span style="color: #FF9800; font-weight: bold;">Alpha (8-13 Hz)</span> - Relaxed wakefulness</li>
+                            <li><span style="color: #9C27B0; font-weight: bold;">Beta (13-30 Hz)</span> - Active thinking</li>
+                            <li><span style="color: #E91E63; font-weight: bold;">Gamma (30-100 Hz)</span> - High-level processing</li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        } else {
+            // Show single wave information
+            const info = waveInfo[this.currentWave];
+            waveInfoElement.innerHTML = `
+                <h3 class="wave-name">${info.name}</h3>
+                <div class="wave-details">
+                    <p><strong>Frequency:</strong> <span class="frequency">${info.frequency}</span></p>
+                    <p><strong>Amplitude:</strong> <span class="amplitude-range">${info.amplitude}</span></p>
+                    <p><strong>State:</strong> <span class="brain-state">${info.state}</span></p>
+                    
+                    <div class="description">
+                        <h4>Characteristics:</h4>
+                        <p>${info.description}</p>
+                        
+                        <h4>Clinical Significance:</h4>
+                        <ul>
+                            ${info.significance.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
     }
     
     drawEEG() {
@@ -185,7 +238,18 @@ class EEGSimulator {
         // Draw grid
         this.drawGrid();
         
-        // Draw multiple EEG channels
+        if (this.showAllWaves) {
+            this.drawAllWaves();
+        } else {
+            this.drawSingleWave();
+        }
+        
+        // Draw time marker
+        this.drawTimeMarker();
+    }
+    
+    drawSingleWave() {
+        // Draw multiple EEG channels for single wave type
         const channelHeight = this.canvas.height / this.waveData.channels;
         const channelLabels = ['Fp1', 'Fp2', 'F3', 'F4', 'C3', 'C4', 'P3', 'P4'];
         
@@ -236,9 +300,89 @@ class EEGSimulator {
             
             this.ctx.stroke();
         }
+    }
+    
+    drawAllWaves() {
+        // Draw all wave types combined in fewer channels
+        const waveTypes = Object.keys(this.allWaveData);
+        const channelHeight = this.canvas.height / waveTypes.length;
+        const waveNames = ['Delta (0.5-4 Hz)', 'Theta (4-8 Hz)', 'Alpha (8-13 Hz)', 'Beta (13-30 Hz)', 'Gamma (30-100 Hz)'];
         
-        // Draw time marker
-        this.drawTimeMarker();
+        waveTypes.forEach((waveType, channel) => {
+            const yOffset = (channel + 0.5) * channelHeight;
+            const waveInfo = this.allWaveData[waveType];
+            
+            // Draw channel label with wave name
+            this.ctx.fillStyle = '#333';
+            this.ctx.font = '11px Inter';
+            this.ctx.fillText(waveNames[channel], 5, yOffset - 15);
+            
+            // Draw baseline
+            this.ctx.strokeStyle = '#e0e0e0';
+            this.ctx.lineWidth = 1;
+            this.ctx.beginPath();
+            this.ctx.moveTo(40, yOffset);
+            this.ctx.lineTo(this.canvas.width - 20, yOffset);
+            this.ctx.stroke();
+            
+            // Draw composite waveform (combination of all waves with emphasis on current)
+            this.ctx.strokeStyle = waveInfo.color;
+            this.ctx.lineWidth = 2;
+            this.ctx.beginPath();
+            
+            for (let x = 40; x < this.canvas.width - 20; x += 2) {
+                const t = (x - 40) * 0.01 + this.time;
+                
+                let y = 0;
+                
+                // Add all wave components with different weights
+                Object.entries(this.allWaveData).forEach(([type, data]) => {
+                    const weight = type === waveType ? 1.0 : 0.3; // Emphasize the primary wave for this channel
+                    const phaseShift = channel * Math.PI * 0.1;
+                    
+                    y += Math.sin(t * data.frequency * 0.5 + phaseShift) * 
+                         this.amplitude * data.amplitude * weight;
+                });
+                
+                // Add some noise for realism
+                const noise = (Math.random() - 0.5) * 3;
+                y += noise;
+                y = yOffset - y;
+                
+                if (x === 40) {
+                    this.ctx.moveTo(x, y);
+                } else {
+                    this.ctx.lineTo(x, y);
+                }
+            }
+            
+            this.ctx.stroke();
+            
+            // Draw a subtle overlay of the individual wave type
+            this.ctx.strokeStyle = waveInfo.color;
+            this.ctx.lineWidth = 1;
+            this.ctx.globalAlpha = 0.7;
+            this.ctx.beginPath();
+            
+            for (let x = 40; x < this.canvas.width - 20; x += 4) {
+                const t = (x - 40) * 0.01 + this.time;
+                const phaseShift = channel * Math.PI * 0.1;
+                
+                let y = Math.sin(t * waveInfo.frequency * 0.5 + phaseShift) * 
+                       this.amplitude * waveInfo.amplitude * 1.2;
+                
+                y = yOffset - y;
+                
+                if (x === 40) {
+                    this.ctx.moveTo(x, y);
+                } else {
+                    this.ctx.lineTo(x, y);
+                }
+            }
+            
+            this.ctx.stroke();
+            this.ctx.globalAlpha = 1.0;
+        });
     }
     
     drawGrid() {
@@ -265,10 +409,16 @@ class EEGSimulator {
     drawTimeMarker() {
         this.ctx.fillStyle = '#FF5722';
         this.ctx.font = '14px Inter';
-        this.ctx.fillText(`Time: ${(this.time * this.speed).toFixed(1)}s`, this.canvas.width - 100, 20);
+        this.ctx.fillText(`Time: ${(this.time * this.speed).toFixed(1)}s`, this.canvas.width - 120, 20);
         
-        this.ctx.fillStyle = this.waveData.color;
-        this.ctx.fillText(`${this.waveData.frequency}Hz`, this.canvas.width - 100, 40);
+        if (this.showAllWaves) {
+            this.ctx.fillStyle = '#333';
+            this.ctx.fillText('All Waves', this.canvas.width - 120, 40);
+            this.ctx.fillText('0.5-100Hz', this.canvas.width - 120, 60);
+        } else {
+            this.ctx.fillStyle = this.waveData.color;
+            this.ctx.fillText(`${this.waveData.frequency}Hz`, this.canvas.width - 120, 40);
+        }
     }
     
     drawSpectrum() {
@@ -287,7 +437,16 @@ class EEGSimulator {
         
         freqBands.forEach((band, index) => {
             const x = 30 + index * barWidth;
-            const intensity = band.name.toLowerCase() === this.currentWave ? 0.8 : 0.2;
+            let intensity;
+            
+            if (this.showAllWaves) {
+                // In combined mode, show all waves with varying intensities
+                intensity = 0.6 + Math.sin(this.time * 2 + index) * 0.2;
+            } else {
+                // In single mode, highlight only the current wave
+                intensity = band.name.toLowerCase() === this.currentWave ? 0.8 : 0.2;
+            }
+            
             const height = intensity * (this.spectrumCanvas.height - 60);
             
             // Draw bar

@@ -123,6 +123,17 @@ header p {
     transform: scale(1.05);
 }
 
+#showAllWaves {
+    background: #2196F3;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+#showAllWaves:hover {
+    background: #1976D2;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
 .controls label {
     font-weight: 500;
     color: #666;
@@ -348,4 +359,30 @@ footer {
 
 .wave-transition {
     transition: all 0.5s ease;
+}
+
+/* All waves mode styling */
+.wave-selector.all-waves-mode {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.all-waves-active #showAllWaves {
+    background: #FF9800 !important;
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+}
+
+.composite-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 4px solid #FF9800;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+/* Enhanced visualization styling */
+.eeg-display.all-waves-mode {
+    border: 2px solid #FF9800;
+    background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%);
 }
